@@ -2,7 +2,7 @@ import React from 'react';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-const Details = ({ open, setOpen }) => {
+const Details = ({ open, setOpen, movieData }) => {
   return (
     <Transition show={open}>
       <Dialog className="relative z-10" onClose={() => setOpen(false)}>
@@ -53,7 +53,14 @@ const Details = ({ open, setOpen }) => {
                     <div className="px-4 sm:px-6">
                       <DialogTitle className="text-base font-semibold leading-6 text-gray-900">Panel title</DialogTitle>
                     </div>
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">{/* Your content */}</div>
+
+
+                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
+                      <p>{movieData?.Title}</p>
+                      <p>{movieData?.Plot}</p>
+                    </div>
+
+
                   </div>
                 </DialogPanel>
               </TransitionChild>

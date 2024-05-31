@@ -1,7 +1,13 @@
 import React from "react";
 import { movies } from "../utils/moveis";
 
-const Movies = ({ setOpen }) => {
+const Movies = ({ setOpen, setSelectedMovie }) => {
+
+  const handleCardClick = (movie) => {
+    setSelectedMovie(movie);
+    console.log(movie)
+    setOpen(true);
+  };
 
   return (
     <div>
@@ -11,9 +17,9 @@ const Movies = ({ setOpen }) => {
             Recommended Movies
           </h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-8 hover:cursor-pointer" onClick={() => setOpen(true)}>
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-8 hover:cursor-pointer" >
             {movies.map((movie) => (
-              <div key={movie.id} className="group relative">
+              <div key={movie.id} className="card group relative" onClick={() => handleCardClick(movie)}>
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
                     src={movie.Poster}

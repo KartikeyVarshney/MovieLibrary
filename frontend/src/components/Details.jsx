@@ -1,6 +1,11 @@
-import React from 'react';
-import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import React from "react";
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const Details = ({ open, setOpen, movieData }) => {
   return (
@@ -50,17 +55,52 @@ const Details = ({ open, setOpen, movieData }) => {
                     </div>
                   </TransitionChild>
                   <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                    <div className="px-4 sm:px-6">
-                      <DialogTitle className="text-base font-semibold leading-6 text-gray-900">Panel title</DialogTitle>
+                    <div className="relative flex-1 px-4 sm:px-6">
+                      {/* <p>{movieData?.Title}</p>
+                      <p>{movieData?.Plot}</p> */}
+                      <div className="flex justify-between border-2 rounded-md">
+                        <img
+                          src={movieData?.Poster}
+                          alt="Poster"
+                          className="w-50 h-60 object-cover rounded-md"
+                        />
+                        <div className="block">
+                          <p className="text-2xl px-4 font-bold">
+                            {movieData?.Title}
+                          </p>
+                          <p className="px-4 text-cyan-800">
+                            {movieData?.Genre}
+                          </p>
+                          <p className="pt-8 px-4 text-slate-800">
+                            <strong className="text-cyan-800">Released</strong>{" "}
+                            - {movieData?.Released}
+                          </p>
+                          <p className="px-4 text-slate-800">
+                            <strong className="text-cyan-800">Actors</strong> -{" "}
+                            {movieData?.Actors}
+                          </p>
+                          <p className="px-4 text-slate-800">
+                            <strong className="text-cyan-800">Director</strong>{" "}
+                            - {movieData?.Director}
+                          </p>
+                          <p className="px-4 text-slate-800">
+                            <strong className="text-cyan-800">
+                              IMDB Rating
+                            </strong>{" "}
+                            - {movieData?.imdbRating}
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <p className="p-2 mt-10">{movieData?.Plot}</p>
+                      </div>
+
+                      <div className="flex justify-center mt-20">
+                        <button className="border-solid border-2 border-sky-500 p-4 px-16 rounded-full hover:bg-sky-500 hover:text-white">
+                          Add to Playlist
+                        </button>
+                      </div>
                     </div>
-
-
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                      <p>{movieData?.Title}</p>
-                      <p>{movieData?.Plot}</p>
-                    </div>
-
-
                   </div>
                 </DialogPanel>
               </TransitionChild>

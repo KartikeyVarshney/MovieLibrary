@@ -8,7 +8,7 @@ export const movies = [
         "https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg",
       Genre: "Action, Adventure, Comedy",
       Director: "James Gunn",
-      Plot: "The Guardians struggle t…us celestial being Ego.",
+      Plot: "The Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord's encounter with his father, the ambitious celestial being Ego.   ",
     },
     
     {

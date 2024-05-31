@@ -1,5 +1,6 @@
 import React from 'react'
 import { Search } from 'lucide-react';
+import Dropdown from './Dropdown.jsx';
 
 const SearchBar = () => {
   return (
@@ -13,6 +14,9 @@ const SearchBar = () => {
           <Search />
         </button>
       </div>
+
+      <Dropdown />
+      
     </div>
   )
 }

@@ -5,7 +5,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   
   return (
-    <div className="w-20%">
+    <div className="w-1/5">
       <div className="grid">
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
         <div className="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">

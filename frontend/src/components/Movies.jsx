@@ -13,6 +13,29 @@ const Movies = () => {
       Director: "James Gunn",
       Plot: "The Guardians struggle t…us celestial being Ego.",
     },
+    {
+      id: 2,
+      Title: "The Dark Knight",
+      Released: "18 Jul 2008",
+      Year: "2008",
+      Poster:
+      "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+      Genre: 	"Action, Crime, Drama",
+      Director: "Christopher Nolan",
+      Plot:"When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice." ,
+    },
+    {
+      id: 3,
+      Title: "The Dark Knight",
+      Released: "18 Jul 2008",
+      Year: "2008",
+      Poster:
+      "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+      Genre: 	"Action, Crime, Drama",
+      Director: "Christopher Nolan",
+      Plot:"When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice." ,
+    },
+
   ];
 
   return (

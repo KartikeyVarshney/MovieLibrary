@@ -1,8 +1,11 @@
-import React from "react";
-import { movies } from "../utils/moveis";
+import React, { useContext } from "react";
+import { movieslist } from "../utils/moveis";
+import MoveisContext from "../context/MoviesContext";
 
 const Movies = ({ setOpen }) => {
 
+  const {movies} = useContext(MoveisContext)
+  console.log(movies)
   return (
     <div>
       <div className="bg-white">

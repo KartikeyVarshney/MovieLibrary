@@ -1,4 +1,4 @@
-export const movies = [
+export const movieslist = [
     {
       id: 1,
       Title: "Guardians of the Galaxy Vol. 2",

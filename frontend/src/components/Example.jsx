@@ -14,6 +14,7 @@ export default function Example({ addPlaylist }) {
   const [formData, setFormData] = useState({
     playlistName: "",
     public: false,
+    owner: localStorage.getItem('userName'),
   });
 
   const handleChange = (e) => {
@@ -30,9 +31,12 @@ export default function Example({ addPlaylist }) {
     console.log(formData);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/addPlaylist", formData);
+      const response = await axios.post(
+        "http://localhost:5000/api/addPlaylist",
+        formData
+      );
       console.log("Form data successfully sent to the backend!", response.data);
-      addPlaylist(response.data);  
+      addPlaylist(response.data);
     } catch (error) {
       console.error("Error sending form data to the backend:", error.message);
     }
@@ -75,21 +79,32 @@ export default function Example({ addPlaylist }) {
                         </DialogTitle>
                         <div className="mt-2">
                           <form className="grid" onSubmit={handleSubmit}>
-                            <div className="flex justify-between">
+                            <div className="grid justify-between">
+                              <div>
+                                <input
+                                  type="text"
+                                  name="playlistName"
+                                  placeholder="Playlist Name"
+                                  className="p-2 m-4 border-2"
+                                  onChange={handleChange}
+                                />
+                                <input
+                                  type="checkbox"
+                                  name="public"
+                                  className="p-2 m-4 border-2"
+                                  onChange={handleChange}
+                                />
+                                <label className="py-2 my-4">Public</label>
+                              </div>
+                              <div>
                               <input
-                                type="text"
-                                name="playlistName"
-                                placeholder="Playlist Name"
-                                className="p-2 m-4 border-2"
-                                onChange={handleChange}
-                              />
-                              <input
-                                type="checkbox"
-                                name="public"
-                                className="p-2 m-4 border-2"
-                                onChange={handleChange}
-                              />
-                              <label className="py-2 my-4">Public</label>
+                                  type="text"
+                                  name="owner"
+                                  value={localStorage.getItem('userName')}
+                                  className="p-2 m-4 border-2"
+                                  disabled
+                                />
+                              </div>
                             </div>
 
                             <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">

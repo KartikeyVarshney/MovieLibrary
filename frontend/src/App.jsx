@@ -7,6 +7,7 @@ import Details from "./components/Details";
 import MoviesContextProvider from "./context/MoviesContextProvider";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./PrivateRoute";
+import Example from "./components/Example";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/details" element={<PrivateRoute element={Details} />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/example" element={<Example />} />
           </Routes>
         </MoviesContextProvider>
       </AuthProvider>

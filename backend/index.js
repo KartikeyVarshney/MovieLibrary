@@ -17,7 +17,14 @@ app.use(session({
 
 const PORT = process.env.PORT || 8000;
 
-mongoose.connect('mongodb://localhost:27017/auth')
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+app.use(cors({ origin: "http://localhost:3000" }));
+
+
+app.use('/',require('./routes/playlist'));
+
+mongoose.connect(process.env.MONGO_DB_URI)
 .then(()=>{
     console.log('Database connected.')
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

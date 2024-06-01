@@ -55,6 +55,7 @@ const SearchBar = () => {
   
 
   },[value ,setMovies , setError])
+
   function handleChange(e)
   {
     setValue(e.target.value)

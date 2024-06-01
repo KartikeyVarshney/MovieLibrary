@@ -4,7 +4,8 @@ const playlistSchema = new mongoose.Schema(
     {
         playlistName: { 
             type: String, 
-            required: true 
+            required: true,
+            unique: true,
         },
         public: {
             type: Boolean,
@@ -21,4 +22,6 @@ const playlistSchema = new mongoose.Schema(
     }
 )
 
-export const Playlist = mongoose.model("Playlist", playlistSchema)
+const Playlist = mongoose.model("Playlist", playlistSchema)
+
+module.exports = Playlist

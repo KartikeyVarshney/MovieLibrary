@@ -5,22 +5,24 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Details from "./components/Details";
 import MoviesContextProvider from "./context/MoviesContextProvider";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <MoviesContextProvider>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/playlists" element={<Playlists />} />
-            <Route exact path="/details" element={<Details />} />
+            <Route exact path="/" element={<PrivateRoute element={Home} />} />
+            <Route exact path="/playlists" element={<PrivateRoute element={Playlists} />} />
+            <Route exact path="/details" element={<PrivateRoute element={Details} />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
           </Routes>
         </MoviesContextProvider>
-      </BrowserRouter>
-    </>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

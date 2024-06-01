@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import MoveisContext from "../context/MoviesContext";
 
-
 const Movies = ({ setOpen, setSelectedMovie }) => {
 
   const handleCardClick = (movie) => {
     setSelectedMovie(movie);
-    console.log(movie);
+    // console.log(movie);
     setOpen(true);
   };
 

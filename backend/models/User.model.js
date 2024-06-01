@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema(
 )
 userSchema.methods.hashPassword = async function(password){
     const salt = await bcrypt.getSalt(10)
+    
     return bcrypt.hash(password,salt)
 }
 

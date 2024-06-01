@@ -1,6 +1,7 @@
+import { v4 as uuidv4 } from 'uuid'
 export const movieslist = [
     {
-      id: 1,
+      id: uuidv4(),
       Title: "Guardians of the Galaxy Vol. 2",
       Released: "05 May 2017",
       Year: "2017",
@@ -12,7 +13,7 @@ export const movieslist = [
     },
     
     {
-      id: 2,
+      id: uuidv4(),
       Title: "The Dark Knight",
       Released: "18 Jul 2008",
       Year: "2008",
@@ -23,7 +24,7 @@ export const movieslist = [
       Plot:"When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice." ,
     },
     {
-      id: 3,
+      id: uuidv4(),
       Title: "Inception",
       Released: "16 Jul 2010",
       Year: "2010",

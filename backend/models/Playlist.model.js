@@ -22,3 +22,5 @@ const playlistSchema = new mongoose.Schema(
 )
 
 export const Playlist = mongoose.model("Playlist", playlistSchema)
+
+module.exports = Playlist

@@ -1,6 +1,36 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate()
+
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(formData)
+    try {
+      const response = await axios.post("/api/signup", formData);
+      console.log("Signup successful:", response.data);
+      navigate("/login")
+    } catch (error) {
+      console.error("Error sending form data to the backend:", error.message);
+    }
+  };
   return (
     <div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -16,20 +46,21 @@ const Signup = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
-                htmlFor="name"
+                htmlFor="username"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Name
+                Username
               </label>
               <div className="mt-2">
                 <input
-                  id="name"
-                  name="name"
+                  id="username"
+                  name="username"
                   type="text"
                   required
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -49,6 +80,7 @@ const Signup = () => {
                   type="email"
                   autoComplete="email"
                   required
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -70,6 +102,7 @@ const Signup = () => {
                   type="password"
                   autoComplete="current-password"
                   required
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -83,7 +116,9 @@ const Signup = () => {
                 Sign Up
               </button>
             </div>
+
           </form>
+          <p>Already signed up?? <button className="text-sky-600" onClick={()=>navigate('/login')}>Login</button></p>
         </div>
       </div>
     </div>

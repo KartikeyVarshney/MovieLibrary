@@ -8,6 +8,7 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+
   return (
     <div className="flex">
       <Navbar />

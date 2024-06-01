@@ -11,8 +11,9 @@ import MoviesContext from '../context/MoviesContext.js';
 const SearchBar = () => {
   const [value , setValue] = useState("")
   const {movies , setMovies} = useContext(MoviesContext)
+
   useEffect(()=>{
-    const abortController = new AbortController() // for preventing race condition..
+    const abortController = new AbortController()
     const signal = abortController.signal
     async function HitApi()
     {
@@ -22,11 +23,11 @@ const SearchBar = () => {
         const res = await fetch(OMDB_API,{signal})
         let data = await res.json()
         setMovies([data])
-        console.log(data)
+        // console.log(data)
       }
       catch(e)
       {
-        console.log(e.message)
+        // console.log(e.message)
       }
       finally{
         // setIsloading(false)
@@ -51,7 +52,7 @@ const SearchBar = () => {
   function handleChange(e)
   {
     setValue(e.target.value)
-      console.log(value)
+      // console.log(value)
   }
  
   return (

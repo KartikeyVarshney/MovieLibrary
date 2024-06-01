@@ -1,4 +1,4 @@
-import  React from "react";
+import React from "react";
 import {
   Menu,
   MenuButton,
@@ -12,7 +12,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const dropdown = () => {
+const Dropdown = () => {
+
   return (
     <Menu as="div" className="fixed right-12 top-6 inline-block text-left ">
       <div>
@@ -35,11 +36,12 @@ const dropdown = () => {
       >
         <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <form method="POST" action="#">
+            <form>
               <MenuItem>
                 {({ focus }) => (
                   <button
                     type="submit"
+            
                     className={classNames(
                       focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
                       "block w-full px-4 py-2 text-left text-sm"
@@ -57,4 +59,4 @@ const dropdown = () => {
   );
 };
 
-export default dropdown;
+export default Dropdown;

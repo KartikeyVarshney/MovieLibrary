@@ -11,7 +11,7 @@ const Movies = ({ setOpen, setSelectedMovie }) => {
   };
 
   const {movies} = useContext(MoveisContext)
-  console.log(movies)
+
   return (
     <div>
       <div className="bg-white">

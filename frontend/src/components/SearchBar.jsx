@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Search, Signal } from 'lucide-react';
+import { Search } from 'lucide-react';
 import Dropdown from './Dropdown.jsx';
 import { useState } from 'react';
 import {movieslist} from '../utils/moveis.js'
@@ -47,7 +47,7 @@ const SearchBar = () => {
     }
   
 
-  },[value ,setMovies])
+  },[value ,movies, setMovies])
   function handleChange(e)
   {
     setValue(e.target.value)

@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Details from "./components/Details";
 import MoviesContextProvider from "./context/MoviesContextProvider";
+import Example from "./components/Example";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/details" element={<Details />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/example" element={<Example />} />
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>

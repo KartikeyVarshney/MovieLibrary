@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { movieslist } from "../utils/moveis";
 import MoveisContext from "../context/MoviesContext";
 
 const Movies = ({ setOpen, setSelectedMovie }) => {

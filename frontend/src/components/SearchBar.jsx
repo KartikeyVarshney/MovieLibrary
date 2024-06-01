@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Search, Signal } from 'lucide-react';
+import { Search } from 'lucide-react';
 import Dropdown from './Dropdown.jsx';
 import { useState } from 'react';
 import {movieslist} from '../utils/moveis.js'
@@ -10,28 +10,34 @@ import MoviesContext from '../context/MoviesContext.js';
 
 const SearchBar = () => {
   const [value , setValue] = useState("")
-  const {movies , setMovies} = useContext(MoviesContext)
+  const { setMovies  , setError} = useContext(MoviesContext)
   useEffect(()=>{
     const abortController = new AbortController() // for preventing race condition..
     const signal = abortController.signal
     async function HitApi()
     {
       try{
-        // setIsloading(true)
+    
         let OMDB_API = `http://www.omdbapi.com/?t=${value}&apikey=bf8866a9`
         const res = await fetch(OMDB_API,{signal})
         let data = await res.json()
+        if(data.Error!=null)
+          {
+            setError(data.Error)
+            // console.log(data.Error)
+          }
         setMovies([data])
-        console.log(data)
+        // console.log(data)
       }
       catch(e)
       {
-        console.log(e.message)
+        if (!e.message.includes('aborted.'))
+          {
+            setError(e.message)
+          }
+        
       }
-      finally{
-        // setIsloading(false)
-      }
-      
+     
       
     }
     if(value.trim()!=="")
@@ -40,6 +46,7 @@ const SearchBar = () => {
     }
     else{
       setMovies(movieslist)
+      
     }
        
     return ()=>{
@@ -47,11 +54,11 @@ const SearchBar = () => {
     }
   
 
-  },[value ,setMovies])
+  },[value ,setMovies , setError])
   function handleChange(e)
   {
     setValue(e.target.value)
-      console.log(value)
+    setError("")
   }
  
   return (

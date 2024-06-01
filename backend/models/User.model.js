@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const bcrypt = require('bcryptjs')
 const userSchema = new mongoose.Schema(
     {
         name: { 
@@ -17,5 +17,14 @@ const userSchema = new mongoose.Schema(
         },
     }
 )
+userSchema.methods.hashPassword = async function(password){
+    const salt = await bcrypt.getSalt(10)
+    return bcrypt.hash(password,salt)
+}
 
-export const User = mongoose.model("User", userSchema)
+userSchema.methods.comparePassword = async function(password)
+{
+    return bcrypt.compare(password, this.password)
+
+}
+module.exports = mongoose.model("User", userSchema)

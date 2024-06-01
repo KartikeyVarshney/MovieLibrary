@@ -7,8 +7,9 @@ export default function MoviesContextProvider({children})
 {
     const [islaoding , setIsloading] = useState(false)
     const [movies , setMovies] = useState(movieslist)
+    const [error , setError] = useState('')
     return(
-        <MoveisContext.Provider value={{movies,setMovies,islaoding,setIsloading}}>
+        <MoveisContext.Provider value={{movies,setMovies,islaoding,setIsloading,error,setError}}>
         {children}
         </MoveisContext.Provider>
     )

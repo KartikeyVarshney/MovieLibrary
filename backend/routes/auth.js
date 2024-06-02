@@ -40,7 +40,9 @@ router.post('/login', async (req, res) => {
     // console.table(req.body)
     // Find the user by email
     const user = await User.findOne({ email });
+
     let username = user.name
+    let userId = user._id
     if (!user) {
       return res.status(400).json({ error: 'Invalid email' });
     }
@@ -56,7 +58,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.ENV_SECRET, { expiresIn: '1h' });
 
     // Send the token to the client
-    res.status(200).json({ 'token':token , username:username });
+    res.status(200).json({ 'token':token , username:username , userid:userId });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: 'Server error' });
@@ -65,5 +67,3 @@ router.post('/login', async (req, res) => {
 
 module.exports = router;
 
-
-module.exports = router;

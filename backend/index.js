@@ -21,8 +21,12 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors({ origin: "http://localhost:3000" }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use('/auth', authRoutes);
 app.use('/',require('./routes/playlist'));
+app.use('/',require('./routes/addMovie'));
 
 mongoose.connect(process.env.MONGO_DB_URI)
 .then(()=>{
@@ -31,9 +35,6 @@ mongoose.connect(process.env.MONGO_DB_URI)
 })
 
 
-app.use(passport.initialize());
-app.use(passport.session());
 
-app.use('/auth', authRoutes);
 
 

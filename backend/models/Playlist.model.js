@@ -12,8 +12,9 @@ const playlistSchema = new mongoose.Schema(
             default: false
         },
         owner: {
-            type: String,
-            ref: 'User'
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
         },
         movieList: {
             type: [mongoose.Schema.Types.ObjectId],

@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema(
             type: String, 
             required: true 
         },
+        playlists: {
+            type: [mongoose.Schema.Types.objectId],
+            ref: 'Playlist',
+        }
     }
 )
 userSchema.methods.hashPassword = async function(password){

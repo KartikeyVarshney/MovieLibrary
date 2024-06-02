@@ -1,47 +1,47 @@
 const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
-  title: {
+  Title: {
     type: String,
     required: true,
   },
-  rated: {
+  Rated: {
     type: String,
     required: true,
   },
-  released: {
+  Released: {
     type: String,
     required: true,
   },
-  runtime: {
+  Runtime: {
     type: String,
     required: true,
   },
-  genre: {
+  Genre: {
     type: String,
     required: true,
   },
-  director: {
+  Director: {
     type: String,
     required: true,
   },
-  actors: {
+  Actors: {
     type: String,
     required: true,
   },
-  plot: {
+  Plot: {
     type: String,
     required: true,
   },
-  language: {
+  Language: {
     type: String,
     required: true,
   },
-  country: {
+  Country: {
     type: String,
     required: true,
   },
-  poster: {
+  Poster: {
     type: String,
     required: true,
   },
@@ -53,6 +53,10 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  movieId: {
+    type: String,
+    required: true,
+  }
 });
 
 const Movie = mongoose.model("Movie", movieSchema);

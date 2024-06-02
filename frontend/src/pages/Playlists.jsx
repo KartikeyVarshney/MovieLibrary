@@ -5,19 +5,25 @@ import MoviesContext from "../context/MoviesContext";
 import axios from "axios";
 
 const Playlist = () => {
-  const { open, setOpen } = useContext(MoviesContext);
-
+  const { open, setOpen } = useContext(MoviesContext); // Assuming you have userId available in your context
+  let userId = localStorage.getItem('userId')
   const [playlists, setPlaylists] = useState([]);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     fetchPlaylists();
-  }, []);
+  });
 
   const fetchPlaylists = () => {
     axios
-      .get("http://localhost:5000/api/playlist")
+      .get(`http://localhost:5000/api/playlist/${userId}`)
       .then((response) => {
-        setPlaylists(response.data);
+        // Filter playlists based on the owner ID
+        const userPlaylists = response.data.filter(
+          (playlist) => playlist.owner === userId
+        );
+        setPlaylists(userPlaylists);
       })
       .catch((error) => {
         console.error("Error fetching playlists:", error);
@@ -34,7 +40,7 @@ const Playlist = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/api/deletePlaylist/${id}`)
+      .delete(`http://localhost:5000/api/deletePlaylist/${id}/${userId}`)
       .then(() => {
         setPlaylists((prevPlaylists) =>
           prevPlaylists.filter((playlist) => playlist._id !== id)
@@ -44,6 +50,27 @@ const Playlist = () => {
         console.error("Error deleting playlist:", error);
       });
   };
+
+  const fetchMovieDetails = async (movieIds) => {
+    try {
+      const movieDetailsPromises = movieIds.map((id) =>
+        axios.get(`http://localhost:5000/api/movie/${id}`)
+      );
+      const movieDetailsResponses = await Promise.all(movieDetailsPromises);
+      const movieDetails = movieDetailsResponses.map(response => response.data);
+      return movieDetails;
+    } catch (error) {
+      console.error("Error fetching movie details:", error);
+      return [];
+    }
+  };
+
+  const showMovies = async (playlist) => {
+    setSelectedPlaylist(playlist);
+    const movieDetails = await fetchMovieDetails(playlist.movieList);
+    setMovies(movieDetails);
+  };
+
 
   return (
     <div className="flex">
@@ -82,12 +109,13 @@ const Playlist = () => {
                 </button>
               </div>
 
-              <Example addPlaylist={addPlaylist} />
+              <Example addPlaylist={addPlaylist} userId={userId} />
 
               <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 hover:cursor-pointer">
                 {playlists.map((playlist) => (
                   <div
                     key={playlist._id}
+                    onClick={() => showMovies(playlist)}
                     className="hover:bg-gray-700 delay-50 duration-100 bg-gray-800 p-5 m-6 rounded-lg w-60 group"
                   >
                     <div className="flex justify-between">
@@ -95,7 +123,10 @@ const Playlist = () => {
                         {playlist.playlistName}
                       </h3>
                       <svg
-                        onClick={() => handleDelete(playlist._id)}
+                        onClick={(e) => {
+                          e.stopPropagation(); 
+                          handleDelete(playlist._id);
+                        }}
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
@@ -105,7 +136,7 @@ const Playlist = () => {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-trash text-red-900"
+                        className="lucide lucide-trash text-red-900 z-100"
                       >
                         <path d="M3 6h18" />
                         <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
@@ -114,15 +145,34 @@ const Playlist = () => {
                     </div>
                     <div className="flex justify-between">
                       <p className="text-gray-400 font-light mt-2 text-xs">
-                        Owner - {playlist.owner}
-                      </p>
-                      <p className="text-gray-400 font-light mt-2 text-xs">
                         {playlist.public ? "Public" : "Private"}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
+
+              {selectedPlaylist && (
+                <div className="mt-8">
+                  <h3 className="text-xl font-bold tracking-tight text-gray-900">
+                    Movies in {selectedPlaylist.playlistName}
+                  </h3>
+                  <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                    {movies.map((movie) => (
+                      <div
+                        key={movie._id}
+                        className="bg-gray-800 p-5 m-6 rounded-lg w-60"
+                      >
+                        <img src={movie.Poster} alt="" />
+                        <h3 className="text-gray-200 font-bold">{movie.Title}</h3>
+                        {/* <p className="text-gray-400 mt-2">{movie.Plot}</p> */}
+                       
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
             </div>
           </div>
         </div>

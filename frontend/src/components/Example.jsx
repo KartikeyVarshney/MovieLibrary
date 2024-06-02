@@ -9,31 +9,38 @@ import {
 import MoviesContext from "../context/MoviesContext";
 import axios from "axios";
 
-export default function Example({ addPlaylist }) {
+export default function Example({ addPlaylist, userId }) {
   const { open, setOpen } = useContext(MoviesContext);
   const [formData, setFormData] = useState({
     playlistName: "",
     public: false,
-    owner: localStorage.getItem('userName'),
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+    if (type === "checkbox") {
+      setFormData({
+        ...formData,
+        [name]: checked,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    // console.log(formData);
+    // console.log(userId)
 
     try {
       const response = await axios.post(
         "http://localhost:5000/api/addPlaylist",
-        formData
+        { ...formData, owner: userId } 
       );
       console.log("Form data successfully sent to the backend!", response.data);
       addPlaylist(response.data);
@@ -91,20 +98,13 @@ export default function Example({ addPlaylist }) {
                                 <input
                                   type="checkbox"
                                   name="public"
+                                  checked={formData.public}
                                   className="p-2 m-4 border-2"
                                   onChange={handleChange}
                                 />
-                                <label className="py-2 my-4">Public</label>
+                                <label for="public" className="py-2 my-4">Public</label>
                               </div>
-                              <div>
-                              <input
-                                  type="text"
-                                  name="owner"
-                                  value={localStorage.getItem('userName')}
-                                  className="p-2 m-4 border-2"
-                                  disabled
-                                />
-                              </div>
+                              {/* Remove the owner input field */}
                             </div>
 
                             <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
